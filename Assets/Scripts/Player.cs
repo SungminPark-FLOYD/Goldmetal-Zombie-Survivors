@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 
@@ -15,11 +16,7 @@ public class Player : MonoBehaviour
     }
 
     
-    void Update()
-    {
-        inputVec.x = Input.GetAxisRaw("Horizontal");
-        inputVec.y = Input.GetAxisRaw("Vertical");
-    }
+    
 
     void FixedUpdate() //물리연산 프레임마다 호출
     {
@@ -30,8 +27,15 @@ public class Player : MonoBehaviour
         //rigid.velocity = inputVec;
 
         //3. 위치 이동
-        Vector2 nextVec = inputVec.normalized * speed * Time.fixedDeltaTime;//벡터값의 크기가 1이 되도록 수정 * fixedDeltaTime은 물리프레임 하나가 소비한 시간
+        Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;//벡터값의 크기가 1이 되도록 수정 * fixedDeltaTime은 물리프레임 하나가 소비한 시간
         rigid.MovePosition(rigid.position + nextVec); //현재위치도 더해주어야 함
+
+    }
+
+    void OnMove(InputValue value)
+    {
+        inputVec = value.Get<Vector2>(); //설정한 타입 가져오기
+
 
     }
 
