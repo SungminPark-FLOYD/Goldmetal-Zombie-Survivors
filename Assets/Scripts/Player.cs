@@ -10,13 +10,14 @@ public class Player : MonoBehaviour
     public float speed;
 
     Rigidbody2D rigid;
+    SpriteRenderer spriter;
+    Animator anim;
     void Awake()//시작할때 한번만 호출
     {
         rigid = GetComponent<Rigidbody2D>();
+        spriter = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
-
-    
-    
 
     void FixedUpdate() //물리연산 프레임마다 호출
     {
@@ -37,6 +38,17 @@ public class Player : MonoBehaviour
         inputVec = value.Get<Vector2>(); //설정한 타입 가져오기
 
 
+    }
+
+    void LateUpdate()
+    {
+        anim.SetFloat("Speed", inputVec.magnitude); //벡터의 순수한 크기값 비교
+
+        if(inputVec.x != 0)
+        {
+            spriter.flipX = inputVec.x < 0; //x 값이 0보다 크면 false 작으면 true
+
+        }
     }
 
 }
