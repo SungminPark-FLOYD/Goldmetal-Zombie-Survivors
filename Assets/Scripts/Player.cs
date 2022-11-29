@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 
 {
-    Vector2 inputVec;
+    public Vector2 inputVec;
     public float speed;
 
     Rigidbody2D rigid;
@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    void FixedUpdate() //물리연산 프레임마다 호출
+     void FixedUpdate() //물리연산 프레임마다 호출
     {
         //1.힘을 준다
         //rigid.AddForce(inputVec);
