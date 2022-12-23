@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     //정적 변수는 즉시 클래서에서 호출 가능
     public static GameManager instance;
+    public PoolManager pool;
     public Player player;
 
     void Awake()
