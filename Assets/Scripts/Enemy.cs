@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Processors;
 
 public class Enemy : MonoBehaviour
 {
@@ -55,5 +56,29 @@ public class Enemy : MonoBehaviour
         speed = data.speed;
         maxHealth = data.health;
         health = data.health;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Bullet"))
+            return;
+
+        health -= collision.GetComponent<Bullet>().damage;
+
+        if(health > 0)
+        {
+            //Live, Hit Action
+        }
+        else
+        {
+            //Die
+            Dead();
+        }
+    }
+
+    void Dead()
+    {
+        //오브젝트 풀링을 사용했기 때문에 비활성화
+        gameObject.SetActive(false);
     }
 }
