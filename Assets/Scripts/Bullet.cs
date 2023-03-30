@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
         {
             rigid.velocity = dir * 15f;
         }
-
+    
         void OnTriggerEnter2D(Collider2D collision)
         {
             if (!collision.CompareTag("Enemy") || per == -1)
